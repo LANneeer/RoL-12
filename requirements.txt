@@ -1,0 +1,7 @@
+aiogram==2.9.2
+chardet==3.0.4
+websockets==8.1
+requests==2.23.0
+aiohttp==3.6.2
+asyncpg==0.21.0
+python-dotenv==0.14.0
