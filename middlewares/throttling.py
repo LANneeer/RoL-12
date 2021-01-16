@@ -1,10 +1,11 @@
 import asyncio
-
+from loader import _
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import DEFAULT_RATE_LIMIT
 from aiogram.dispatcher.handler import CancelHandler, current_handler
 from aiogram.dispatcher.middlewares import BaseMiddleware
 from aiogram.utils.exceptions import Throttled
+
 
 # Тротлинг, для того что-бы отключить спам
 class Throttling(BaseMiddleware):
@@ -31,7 +32,7 @@ class Throttling(BaseMiddleware):
     async def message_throttled(self, message: types.Message, throttled: Throttled):
         delta = throttled.rate - throttled.delta
         if throttled.exceeded_count == 2:
-            await message.reply('Не пишите так быстро!')
+            await message.reply(_('Не пишите так быстро!'))
         elif throttled.exceeded_count == 3:
-            await message.reply('Всё! Бот временно не будет отвечать вам!')
+            await message.reply(_('Всё! Бот временно не будет отвечать вам!'))
         await asyncio.sleep(delta)

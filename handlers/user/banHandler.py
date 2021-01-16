@@ -4,7 +4,7 @@ from aiogram.types import Message
 
 from filters import Teacher
 from keyboards.default import Teachers_buttons
-from keyboards.default.Menu_buttons import back, yes_or_no
+from keyboards.default.mainKeyboards import back, yes_or_no
 from loader import dp, db
 
 

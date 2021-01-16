@@ -8,18 +8,18 @@ from aiogram.utils.exceptions import Unauthorized
 
 from filters import Teacher
 from keyboards.default import OnePlus
-from keyboards.default.Menu_buttons import classroom_number, classroom_letter, back, numbers_list, letters_list, \
+from keyboards.default.mainKeyboards import classroom_number, classroom_letter, back, numbers_list, letters_list, \
     back_and_send
-from keyboards.default.Teacher_menu import Teachers_buttons
-from loader import dp, db, bot
-from state import SendWork, GetWork, Advert, TellWork, TeachersUpdates
+from keyboards.default.teacherKeyboard import Teachers_buttons
+from loader import dp, db, bot, _
+from states import SendWork, GetWork, Advert, TellWork, TeachersUpdates
 from utils.misc import rate_limit
 
 
 # FUNC ОТПРАВИТЬ ЗАДАНИЯ
 
 @dp.message_handler(
-    lambda message: message.text and message.text.upper() in ['ОТПРАВИТЬ ЗАДАНИЯ', 'ОТПРАВИТЬ ЗАДАНИЯ 📤'],
+    lambda message: message.text and message.text.upper() in [_('ОТПРАВИТЬ ЗАДАНИЯ'), _('ОТПРАВИТЬ ЗАДАНИЯ 📤')],
     Teacher())
 async def send_HW_TWO(message: Message, state: FSMContext):
     teacher_data = await db.get_teacher_data(message.from_user.id)
@@ -28,7 +28,7 @@ async def send_HW_TWO(message: Message, state: FSMContext):
     pargroup = teacher_data[2]
     school = teacher_data[3]
     await state.update_data(subject=subject, group=group, pargroup=pargroup, school=school)
-    await message.answer('Введите <b>один из ваших предметов</b>, по которому собираетесь задать работы:',
+    await message.answer(_('Введите <b>один из ваших предметов</b>, по которому собираетесь задать работы:'),
                          reply_markup=OnePlus(
                              text=subject.split(', '),
                          ).reply_keyboard)
@@ -38,87 +38,87 @@ async def send_HW_TWO(message: Message, state: FSMContext):
 @dp.message_handler(state=SendWork.change_subject)
 async def get_subject(message: Message, state: FSMContext):
     subject = message.text.upper()
-    if subject == '🔙НАЗАД' or subject == 'НАЗАД':
+    if subject == _('🔙НАЗАД') or subject == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         subjects_teacher = (await state.get_data()).get('subject')
         group_teacher = (await state.get_data()).get('group')
         if subject.title() in subjects_teacher.split(', '):
             await state.update_data(subject=subject.title())
-            await message.answer('Введите <b>один из ваших отделений</b>, по которому собираетесь задать работы:',
+            await message.answer(_('Введите <b>один из ваших отделений</b>, по которому собираетесь задать работы:'),
                                  reply_markup=OnePlus(
                                      text=group_teacher.split('/'),
                                  ).reply_keyboard)
             await SendWork.next()
         else:
-            await message.answer('Это <b>не ваш</b> предмет!')
+            await message.answer(_('Это <b>не ваш</b> предмет!'))
 
 
 @dp.message_handler(state=SendWork.change_group)
 async def get_group(message: Message, state: FSMContext):
     group = message.text.upper()
-    if group == '🔙НАЗАД' or group == 'НАЗАД':
+    if group == _('🔙НАЗАД') or group == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         group_teacher = (await state.get_data()).get('group')
         if group in group_teacher.split('/'):
             await state.update_data(group=group.upper())
-            await message.answer('Выберите <b>номер</b> класса, которому собираетесь отправить задание:',
+            await message.answer(_('Выберите <b>номер</b> класса, которому собираетесь отправить задание:'),
                                  reply_markup=classroom_number)
             await SendWork.next()
         else:
-            await message.answer('Это <b>не ваше</b> отделение!')
+            await message.answer(_('Это <b>не ваше</b> отделение!'))
 
 
 @dp.message_handler(state=SendWork.classroomNumber)
 async def get_number(message: Message, state: FSMContext):
     answer = message.text.upper()
-    if answer == '🔙НАЗАД' or answer == 'НАЗАД':
+    if answer == _('🔙НАЗАД') or answer == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         if answer in numbers_list:
             await state.update_data(classroomNumber=answer)
-            await message.answer('Выберите <b>букву</b> класса', reply_markup=classroom_letter)
+            await message.answer(_('Выберите <b>букву</b> класса'), reply_markup=classroom_letter)
             await SendWork.next()
         else:
-            await message.answer('Пожалуйста выберите <b>число из списка</b>:', reply_markup=classroom_number)
+            await message.answer(_('Пожалуйста выберите <b>число из списка</b>:'), reply_markup=classroom_number)
 
 
 @dp.message_handler(state=SendWork.classroomLetter)
 async def get_letter(message: Message, state: FSMContext):
     answer = message.text.upper()
-    if answer == '🔙НАЗАД' or answer == 'НАЗАД':
+    if answer == _('🔙НАЗАД') or answer == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         if answer in letters_list:
             await state.update_data(classroomLetter=answer)
-            await message.answer('Отправьте <b>документ или фото</b> с заданием!', reply_markup=back_and_send)
+            await message.answer(_('Отправьте <b>документ или фото</b> с заданием!'), reply_markup=back_and_send)
             await SendWork.next()
         else:
-            await message.answer('Пожалуйста выберите <b>букву из списка</b>:', reply_markup=classroom_letter)
+            await message.answer(_('Пожалуйста выберите <b>букву из списка</b>:'), reply_markup=classroom_letter)
 
 
 @rate_limit(limit=0)
 @dp.message_handler(state=SendWork.files_id, content_types=ContentTypes.ANY)
 async def get_document(message: Message, state: FSMContext):
     answer = str(message.text).upper()
-    if answer == 'СДАТЬ':
+    if answer == _('СДАТЬ'):
         data = await state.get_data()
         group = data.get('group')
         pargroup = data.get('pargroup')
@@ -150,13 +150,16 @@ async def get_document(message: Message, state: FSMContext):
                                            classroom_letter=classroomLetter,
                                            subject=subject, file_id=file, pargroup=int(pargroup))
             await state.finish()
-            await message.answer(f'Задание для {classroomNumber} "{classroomLetter}" успешно отправлено!',
+            await message.answer(_('Задание для {classroomNumber} "{classroomLetter}" успешно отправлено!').format(
+                classroomNumber=classroomNumber,
+                classroomLetter=classroomLetter
+            ),
                                  reply_markup=Teachers_buttons)
         else:
-            await message.answer('<b>Вы не отправили ни одного файла!</b>\n'
-                                 'Отправьте <b>файл или фото</b>, или же нажмите <b>"НАЗАД"</b>',
+            await message.answer(_('<b>Вы не отправили ни одного файла!</b>\n'
+                                   'Отправьте <b>файл или фото</b>, или же нажмите <b>"НАЗАД"</b>'),
                                  reply_markup=back_and_send)
-    elif answer == '🔙НАЗАД' or answer == 'НАЗАД':
+    elif answer == _('🔙НАЗАД') or answer == _('НАЗАД'):
         with open('temp.json', 'r') as file:
             try:
                 temp_data = json.load(file)
@@ -169,9 +172,9 @@ async def get_document(message: Message, state: FSMContext):
             with open('temp.json', 'w') as f:
                 f.write(json.dumps(temp_data))
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         temp_data = None
@@ -185,7 +188,7 @@ async def get_document(message: Message, state: FSMContext):
         with open('temp.json', 'w') as file:
             user_id = str(message.from_user.id)
             if len(temp_data.get(user_id, [])) == 5:
-                await message.answer('Вы уже загрузили 5 файлов, нажмите кнопку <b>"СДАТЬ"</b>:')
+                await message.answer(_('Вы уже загрузили 5 файлов, нажмите кнопку <b>"СДАТЬ"</b>:'))
             else:
                 temp_data[user_id] = temp_data.get(user_id, []) + [str(message.message_id)]
             file.write(str(json.dumps(temp_data)))
@@ -193,7 +196,8 @@ async def get_document(message: Message, state: FSMContext):
 
 # FUNC Получить работы!
 
-@dp.message_handler(lambda message: message.text and message.text.upper() in ['ПОЛУЧИТЬ РАБОТЫ', 'ПОЛУЧИТЬ РАБОТЫ 📥'],
+@dp.message_handler(lambda message: message.text and message.text.upper() in [_('ПОЛУЧИТЬ РАБОТЫ'),
+                                                                              _('ПОЛУЧИТЬ РАБОТЫ 📥')],
                     Teacher())
 async def get_works(message: Message, state: FSMContext):
     teacher_data = await db.get_teacher_data(message.from_user.id)
@@ -202,7 +206,7 @@ async def get_works(message: Message, state: FSMContext):
     pargroup = teacher_data[2]
     school = teacher_data[3]
     await state.update_data(subject=subject, group=group, pargroup=pargroup, school=school)
-    await message.answer('Введите <b>один из ваших предметов</b> по которому собираетесь получить работы:',
+    await message.answer(_('Введите <b>один из ваших предметов</b> по которому собираетесь получить работы:'),
                          reply_markup=OnePlus(
                              text=subject.split(', '),
                          ).reply_keyboard)
@@ -212,72 +216,72 @@ async def get_works(message: Message, state: FSMContext):
 @dp.message_handler(state=GetWork.change_subject)
 async def get_subject(message: Message, state: FSMContext):
     subject = message.text.upper()
-    if subject == '🔙НАЗАД' or subject == 'НАЗАД':
+    if subject == _('🔙НАЗАД') or subject == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         subjects_teacher = (await state.get_data()).get('subject')
         group_teacher = (await state.get_data()).get('group')
         if subject.title() in subjects_teacher.split(', '):
             await state.update_data(subject=subject.title())
-            await message.answer('Введите <b>один из ваших отделений</b>, по которому собираетесь получить работы:',
+            await message.answer(_('Введите <b>один из ваших отделений</b>, по которому собираетесь получить работы:'),
                                  reply_markup=OnePlus(
                                      text=group_teacher.split('/'),
                                  ).reply_keyboard)
             await GetWork.next()
         else:
-            await message.answer('Это <b>не ваш</b> предмет!')
+            await message.answer(_('Это <b>не ваш</b> предмет!'))
 
 
 @dp.message_handler(state=GetWork.change_group)
 async def get_group(message: Message, state: FSMContext):
     group = message.text.upper()
-    if group == '🔙НАЗАД' or group == 'НАЗАД':
+    if group == _('🔙НАЗАД') or group == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         group_teacher = (await state.get_data()).get('group')
         if group in group_teacher.split('/'):
             await state.update_data(group=group.upper())
-            await message.answer('Выберите <b>номер</b> класса, у которого собираетесь получить работы:',
+            await message.answer(_('Выберите <b>номер</b> класса, у которого собираетесь получить работы:'),
                                  reply_markup=classroom_number)
             await GetWork.next()
         else:
-            await message.answer('Это <b>не ваше</b> отделение!')
+            await message.answer(_('Это <b>не ваше</b> отделение!'))
 
 
 @dp.message_handler(state=GetWork.classroomNumber)
 async def get_number(message: Message, state: FSMContext):
     number = message.text.upper()
-    if number == '🔙НАЗАД' or number == 'НАЗАД':
+    if number == _('🔙НАЗАД') or number == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         if number in numbers_list:
             await state.update_data(classroomNumber=number)
-            await message.answer('Выберите <b>букву</b> класса', reply_markup=classroom_letter)
+            await message.answer(_('Выберите <b>букву</b> класса'), reply_markup=classroom_letter)
             await GetWork.next()
         else:
-            await message.answer('Пожалуйста выберите <b>число из списка</b>:', reply_markup=classroom_number)
+            await message.answer(_('Пожалуйста выберите <b>число из списка</b>:'), reply_markup=classroom_number)
 
 
 @dp.message_handler(state=GetWork.classroomLetter)
 async def get_caption(message: Message, state: FSMContext):
     letter = str(message.text).upper()
-    if letter == '🔙НАЗАД' or letter == 'НАЗАД':
+    if letter == _('🔙НАЗАД') or letter == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         if letter in letters_list:
@@ -300,33 +304,45 @@ async def get_caption(message: Message, state: FSMContext):
                                                           pargroup=pargroup, school=school), key=lambda x: x[4])
             temp_var = None
             if len(works) < 1:
-                await message.answer(f'Пока что, никто не отправил задания с {classroomNumber} "{classroomLetter}"\n'
-                                     '<b>Или же вы ранее получили их работы!</b>', reply_markup=Teachers_buttons)
+                await message.answer(_('Пока что, никто не отправил задания с {classroomNumber} "{classroomLetter}"\n'
+                                     '<b>Или же вы ранее получили их работы!</b>').format(
+                    classroomNumber=classroomNumber,
+                    classroomLetter=classroomLetter
+                ),
+                                     reply_markup=Teachers_buttons)
             else:
                 unic_id = randint(0, 99999)
-                await message.answer(f'Уникальный идентификатор полученных работ: {unic_id}\n'
-                                     f'Работы учеников {classroomNumber} "{classroomLetter}":',
+                await message.answer(_('Уникальный идентификатор полученных работ: {unic_id}\n'
+                                       'Работы учеников {classroomNumber} "{classroomLetter}":').format(
+                    unic_id=unic_id,
+                    classroomNumber=classroomNumber,
+                    classroomLetter=classroom_letter
+                ),
                                      reply_markup=Teachers_buttons)
                 for work in works:
                     if temp_var != work[4]:
-                        await message.answer('*==============================*\n\n'
-                                             f'Фамилия: {work[0]}\nИмя: {work[1]}\nАккаунт: @{work[3]}')
+                        await message.answer(_('*==============================*\n\n'
+                                               'Фамилия: {work_a}\nИмя: {work_b}\nАккаунт: @{work_c}').format(
+                            work_a=work[0],
+                            work_b=work[1],
+                            work_c=work[3]
+                        ))
                         temp_var = work[4]
                     try:
                         await bot.forward_message(chat_id=message.from_user.id, from_chat_id=work[4],
                                                   message_id=work[2])
                     except MessageToForwardNotFound:
-                        await message.answer('<u>пользователь удалил задание</u>')
+                        await message.answer(_('<u>пользователь удалил задание</u>'))
                     await db.delete_students_file(id=work[4], subject=subject, file_id=work[2])
             await state.finish()
         else:
-            await message.answer('Пожалуйста выберите <b>букву из списка</b>:', reply_markup=classroom_letter)
+            await message.answer(_('Пожалуйста выберите <b>букву из списка</b>:'), reply_markup=classroom_letter)
 
 
 # FUNC Создать объявление!
 
-@dp.message_handler(lambda message: message.text and message.text.upper() in ['СОЗДАТЬ ОБЪЯВЛЕНИЕ',
-                                                                              'СОЗДАТЬ ОБЪЯВЛЕНИЕ ✏️'], Teacher())
+@dp.message_handler(lambda message: message.text and message.text.upper() in [_('СОЗДАТЬ ОБЪЯВЛЕНИЕ'),
+                                                                              _('СОЗДАТЬ ОБЪЯВЛЕНИЕ ✏️')], Teacher())
 async def advertise(message: Message, state: FSMContext):
     teacher_data = await db.get_teacher_data(message.from_user.id)
     subject = teacher_data[0]
@@ -334,7 +350,7 @@ async def advertise(message: Message, state: FSMContext):
     pargroup = teacher_data[2]
     school = teacher_data[3]
     await state.update_data(subject=subject, group=group, pargroup=pargroup, school=school)
-    await message.answer('Введите <b>один из ваших предметов</b> по которому собираетесь создать объявление:',
+    await message.answer(_('Введите <b>один из ваших предметов</b> по которому собираетесь создать объявление:'),
                          reply_markup=OnePlus(
                              text=subject.split(', '),
                          ).reply_keyboard)
@@ -344,11 +360,11 @@ async def advertise(message: Message, state: FSMContext):
 @dp.message_handler(state=Advert.change_subject)
 async def get_subject(message: Message, state: FSMContext):
     subject = message.text.upper()
-    if subject == '🔙НАЗАД' or subject == 'НАЗАД':
+    if subject == _('🔙НАЗАД') or subject == _('НАЗАД'):
         await state.finish()
-        await message.answer('<b>Главное меню</b>\n'
-                             'выберите действие с кнопок ниже\n\n'
-                             'Доп. Информация: /help',
+        await message.answer(_('<b>Главное меню</b>\n'
+                               'выберите действие с кнопок ниже\n\n'
+                               'Доп. Информация: /help'),
                              reply_markup=Teachers_buttons)
     else:
         subjects_teacher = (await state.get_data()).get('subject')

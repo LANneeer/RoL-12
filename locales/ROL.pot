@@ -1,0 +1,309 @@
+# Translations template for PROJECT.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-11-14 20:52+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: handlers/user/dropHandler.py:10
+msgid "<b>Вы удалили вашу учетную запись</b>"
+msgstr ""
+
+#: handlers/user/helpHandler.py:8
+msgid "Писать ему: @salvatttt"
+msgstr ""
+
+#: handlers/user/menuHandler.py:11 handlers/user/menuHandler.py:20
+msgid ""
+"<b>Главное меню</b>\n"
+"выберите действие с кнопок ниже\n"
+"\n"
+"Доп. Информация: /help"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:24
+#: handlers/user/registeringHandler.py:180
+msgid "Выберите вашу школу:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:28
+#: handlers/user/registeringHandler.py:33
+#: handlers/user/registeringHandler.py:184
+msgid ""
+"Вы ввели <b>фамилию и имя</b> в неправильном формате!\n"
+"Введите <b>фамилию и имя <u>через пробел</u></b>:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:31
+#: handlers/user/registeringHandler.py:187
+msgid "Слишком длинная фамилия/имя"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:43
+#: handlers/user/registeringHandler.py:71
+msgid "Выберите <u>отделение</u> вашего класса:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:46
+#: handlers/user/registeringHandler.py:202
+msgid ""
+"Такой <b>школы нету</b> в списке!\n"
+"Выберите школу из <b>списка</b>!"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:55
+#: handlers/user/registeringHandler.py:109
+#: handlers/user/registeringHandler.py:164
+#: handlers/user/registeringHandler.py:211
+#: handlers/user/registeringHandler.py:259
+#: handlers/user/registeringHandler.py:308 handlers/user/startHandler.py:25
+#: handlers/user/startHandler.py:49
+msgid "Введите вашу <b><u>фамилию и имя</u></b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:59
+#: handlers/user/registeringHandler.py:87
+msgid "Выберите <u>номер</u> вашего класса:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:62
+msgid "Выберите <b>отделение</b> из списка!"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:75
+#: handlers/user/registeringHandler.py:103
+msgid "Выберите <u>букву</u> вашего класса:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:78
+msgid "Пожалуйста введите <b>число</b> вашего класса:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:91
+msgid "Выберите вашу <b>пар-группу</b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:94
+msgid "Введите <b>букву из списка</b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:107
+#: handlers/user/registeringHandler.py:257
+msgid "Зачем ты удалил своё имя пользователя?! Регистрируйся заново как и начал!"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:121
+msgid ""
+"Имя: {first_name}\n"
+"Фамилия: {last_name}\n"
+"Школа: {school}\n"
+"Отделение: {group}\n"
+"Класс: {classroomNumber} \"{classroomLetter}\"\n"
+"Пар-группа: {pargroup}\n"
+"Ваше имя пользователя: @{username}\n"
+"\n"
+"Всё ли введено верно?"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:133
+#: handlers/user/registeringHandler.py:281
+msgid "Выберите <b>пар-группу</b> из списка!"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:148
+#: handlers/user/registeringHandler.py:295
+msgid "ДА"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:156
+msgid ""
+"Вы успешно внесены в базу данных!\n"
+"\n"
+"Если у вас не появились кнопки снизу, то нажмите на эту кнопку возле "
+"ввода текста\n"
+"\n"
+"<b>Так-же не думайте кидать иной контент по мимо учебного!\n"
+"(мы спокойно можем связаться с вами по номеру телефона :3)</b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:163
+#: handlers/user/registeringHandler.py:307
+msgid "НЕТ"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:167
+#: handlers/user/registeringHandler.py:311
+msgid "<b>Вы не ответили на вопрос!</b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:189
+msgid ""
+"вы ввели <u>фамилию и имя</u> в неправильном формате!\n"
+"введите <b>фамилию и имя <u>через пробел</u></b>:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:199
+#: handlers/user/registeringHandler.py:230
+msgid "Выберите <u>отделение</u> вашего предмета:"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:215
+#: handlers/user/registeringHandler.py:250
+msgid ""
+"Выберите <u>название</u> вашего предмета:\n"
+"\n"
+"<b><u>Если у вас более одного предмета вам надо ввеcти их в ручную и "
+"через запятую</u></b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:221
+msgid "Выберите <u>отделение</u> из списка!"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:236
+msgid ""
+"Выберите вашу <b>пар-группу</b>\n"
+"<b>Выберите \"0\" если ни один из ваших предметов не делится на "
+"паргруппы, или вы ведете его один</b>"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:270
+msgid ""
+"Имя: {first_name}\n"
+"Фамилия: {last_name}\n"
+"Школа: {school}\n"
+"Отделение: {group}\n"
+"Предметы: {teacher_subjects}\n"
+"Пар-группа: {pargroup}\n"
+"Ваше имя пользователя: @{username}\n"
+"\n"
+"Всё ли введено верно?"
+msgstr ""
+
+#: handlers/user/registeringHandler.py:302
+msgid ""
+"Вы успешно внесены в базу данных!\n"
+"\n"
+"Если у вас не появились кнопки снизу, то нажмите на эту кнопку возле "
+"ввода текста"
+msgstr ""
+
+#: handlers/user/startHandler.py:16 handlers/user/startHandler.py:40
+msgid ""
+"<b>У вас нету имени пользователя!</b>\n"
+"<b>Поставьте себе имя пользователя что-бы пройти регистрацию</b>\n"
+"\n"
+"<u>Настройки >> Имя пользователя</u>\n"
+"И перейдите заново по ссылке\n"
+"\n"
+"<b><u>Так же НИКОГДА не меняйте ваше имя пользователя</u></b><u>, потому "
+"что оно не поменятся в базе данных где хранятся ваши данные! Так вы "
+"сделаете себе хуже!</u>"
+msgstr ""
+
+#: handlers/user/startHandler.py:23
+msgid ""
+"<b>Здравствуйте, вас приветствует ROL-bot</b>\n"
+"\n"
+"<u>Вас нет в базе данных учителей!</u>"
+msgstr ""
+
+#: handlers/user/startHandler.py:29
+msgid ""
+"<b>Вы есть в базе данных!</b>\n"
+"Нажите \"назад\":"
+msgstr ""
+
+#: handlers/user/startHandler.py:47
+msgid ""
+"<b>Здравствуйте, вас приветствует ROL-bot</b>\n"
+"\n"
+"<u>Вас нет в базе данных учеников!</u>"
+msgstr ""
+
+#: handlers/user/startHandler.py:53
+msgid ""
+"<b>Вы есть в базе данных!</b>\n"
+"Нажмите \"назад\":"
+msgstr ""
+
+#: handlers/user/unknown_message.py:12
+msgid ""
+"<b>Вы ввели что-то не то!</b>\n"
+"Нажмите \"НАЗАД\"!"
+msgstr ""
+
+#: keyboards/default/mainKeyboards.py:10
+#: keyboards/default/subjectsKeyboard.py:10
+#: keyboards/default/subjectsKeyboard.py:50
+msgid "🔙НАЗАД"
+msgstr ""
+
+#: keyboards/default/mainKeyboards.py:80
+msgid "СДАТЬ"
+msgstr ""
+
+#: keyboards/default/mainKeyboards.py:88
+msgid "Да"
+msgstr ""
+
+#: keyboards/default/mainKeyboards.py:89
+msgid "Нет"
+msgstr ""
+
+#: keyboards/default/studentKeyboard.py:6
+msgid "Сдать задание 📤"
+msgstr ""
+
+#: keyboards/default/studentKeyboard.py:7
+msgid "Вопрос к учителю ℹ️"
+msgstr ""
+
+#: keyboards/default/studentKeyboard.py:8
+msgid "Узнать задание 📥"
+msgstr ""
+
+#: keyboards/default/studentKeyboard.py:11
+msgid "Отметиться на уроке ❗️"
+msgstr ""
+
+#: keyboards/default/teacherKeyboard.py:6
+msgid "Отправить задания 📤"
+msgstr ""
+
+#: keyboards/default/teacherKeyboard.py:7
+msgid "Получить работы 📥"
+msgstr ""
+
+#: keyboards/default/teacherKeyboard.py:10
+msgid "Создать объявление ✏️"
+msgstr ""
+
+#: keyboards/default/teacherKeyboard.py:11
+msgid "Сведения о работах 📎"
+msgstr ""
+
+#: keyboards/default/teacherKeyboard.py:14
+msgid "Открыть урок ⏰"
+msgstr ""
+
+#: middlewares/throttling.py:35
+msgid "Не пишите так быстро!"
+msgstr ""
+
+#: middlewares/throttling.py:37
+msgid "Всё! Бот временно не будет отвечать вам!"
+msgstr ""
+

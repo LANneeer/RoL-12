@@ -1,4 +1,4 @@
-def rate_limit(limit: int, key = None):
+def rate_limit(limit: int, key=None):
 
     def decorator(func):
         setattr(func, 'throttling_rate_limit', limit)

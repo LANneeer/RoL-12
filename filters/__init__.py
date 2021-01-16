@@ -1,8 +1,5 @@
 from aiogram import Dispatcher
-
-from .special_filters import Students
-from .special_filters import Teacher
-from .special_filters import Ban
+from .specialFilters import Students, Teacher, Ban
 
 
 def setup(dp: Dispatcher):

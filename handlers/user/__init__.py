@@ -1,11 +1,11 @@
-from .Start_send import dp
-from .Help_send import dp
-from .Menu_send import dp
-from .Teachers_handler import dp
-from .Students_handler import dp
-from .Registrant_FSM import dp
-from .DELETE_handler import dp
-from .Ban_handler import dp
+from .startHandler import dp
+from .helpHandler import dp
+from .menuHandler import dp
+from .teacherHandler import dp
+from .studentHandler import dp
+from .registeringHandler import dp
+from .dropHandler import dp
+from .banHandler import dp
 from .unknown_message import dp
 
 __all__ = ['dp']

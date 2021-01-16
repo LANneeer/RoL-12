@@ -4,7 +4,6 @@ from aiogram.dispatcher.filters import BoundFilter
 from loader import db
 
 
-# Фильтры для учеников и учителей
 class Students(BoundFilter):
     async def check(self, message: types.Message):
         if await db.exist_student(message.from_user.id):
@@ -17,7 +16,6 @@ class Teacher(BoundFilter):
             return True
 
 
-# Фильтр бана
 class Ban(BoundFilter):
     async def check(self, message: types.Message):
         if not await db.exists_ban(message.from_user.id):

@@ -1,5 +1,7 @@
-.env
+config/.env
 __pycache__
 .idea
 gits.txt
 env
+handlers/user/startHandler.py
+*.mo

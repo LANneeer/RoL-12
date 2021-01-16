@@ -2,16 +2,16 @@ import asyncio
 
 import asyncpg
 
-from data import config
+from config import const
 
 
 class Database:
     def __init__(self, loop: asyncio.AbstractEventLoop):
         self.pool: asyncio.pool.Pool = loop.run_until_complete(
             asyncpg.create_pool(
-                user=config.PG_USER,
-                password=config.PG_PASSWORD,
-                host=config.IP
+                user=const.PG_USER,
+                password=const.PG_PASSWORD,
+                host=const.IP
             )
         )
 
